@@ -16,7 +16,6 @@ An explainable **flood-simulation & decision-support engine** — built in 24 ho
 [![Leaflet](https://img.shields.io/badge/Leaflet-OpenStreetMap-199900?style=for-the-badge&logo=leaflet&logoColor=white)](frontend)
 
 [![Tests](https://img.shields.io/badge/tests-passing-brightgreen?style=flat-square)](backend/tests)
-[![License](https://img.shields.io/badge/license-MIT-informational?style=flat-square)](#-license)
 [![Status](https://img.shields.io/badge/status-hackathon%20prototype-orange?style=flat-square)](#-important-disclaimer)
 [![Made with](https://img.shields.io/badge/made%20with-24%20hours%20%26%20too%20much%20coffee-critical?style=flat-square)](#)
 
