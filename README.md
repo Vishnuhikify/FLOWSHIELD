@@ -211,7 +211,7 @@ flowshield/
 
 ## 🧪 Scenario Lab
 
-The scenario system changes simulation *inputs*, then reuses the exact same flood engine — nothing about the physics changes per-scenario.
+The scenario system changes simulation inputs, then reuses the exact same deterministic flood simulation engine — the underlying model remains the same across scenarios.
 
 | Scenario | Modeled change |
 |---|---|
