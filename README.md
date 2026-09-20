@@ -41,7 +41,9 @@ The application provides:
 - Bengaluru map and simulated neighborhood drill-down
 - Scenario and intervention comparison
 - Guided Demo Mode
-  
+
+Screenshots/demo GIFs can be added later when actual files are available.
+
 <br>
 
 ## 💡 Why FLOWSHIELD
