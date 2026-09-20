@@ -48,15 +48,10 @@ Screenshots/demo GIFs can be added later when actual files are available.
 
 ## 💡 Why FLOWSHIELD
 
-Bengaluru's **September 5, 2022** flood event affected areas including Mahadevapura, Bellandur, Varthur, K R Puram and Sarjapur after **131.6 mm of rain was recorded over 24 hours**.
-
-FLOWSHIELD focuses on a practical decision-support question: how can a simplified simulation help users **test modeled intervention scenarios before committing resources**?
+Bengaluru's **September 5, 2022** flood event left neighborhoods like Mahadevapura, Bellandur, Varthur, K R Puram and Sarjapur underwater after **131.6 mm of rain in 24 hours**. Emergency response is reactive because it's hard to *test* an intervention before committing resources to it.
 
 FLOWSHIELD asks a narrower, answerable question:
 
 > *If it rains this much, and we take this drainage action — **how does the modeled outcome change**, region by region, before a single pump is deployed?*
 
 The single continuous workflow:
-
-```text
-☔ SIMULATE  →  📡 MONITOR  →  🚨 WARN  →  🧪 TEST RESPONSE  →  📊 COMPARE MODELED IMPACT
