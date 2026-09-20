@@ -269,7 +269,7 @@ The replay uses the documented 24-hour rainfall total as a modeled input; it doe
 
 ## 🎬 Demo Mode
 
-A fully deterministic, judge-ready walkthrough that drives the **real** application and **real** backend — no mocked numbers:
+A fully deterministic walkthrough that drives the **real** application and **real** backend:
 
 ```
 1️⃣  Baseline            →  2️⃣  Heavy rainfall scenario   →  3️⃣  Flood progression
