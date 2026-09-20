@@ -432,7 +432,7 @@ AI coding assistants supported code generation, debugging, test generation, docu
 
 ## 📄 License
 
-Released under the **MIT License** — see [`LICENSE`](LICENSE) for details.
+No open-source license has been specified for this hackathon prototype.
 
 ## 🙏 Acknowledgments
 
