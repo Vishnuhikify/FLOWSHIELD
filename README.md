@@ -1,283 +1,317 @@
-# FLOWSHIELD — Predict the flood. Test the response.
+<div align="center">
 
-FLOWSHIELD is an interactive, explainable **flood-simulation and decision-support prototype** built for Hack-a-Matics 2026 under the VECTOR theme.
+# 🌊 FLOWSHIELD
 
-It models how rainfall can accumulate and move across a connected synthetic city grid, classifies regions as **Safe / Warning / Critical**, shows flood progression over time, and lets users test scenarios and interventions before comparing their modeled effects.
+### Predict the flood. Test the response. Save the region.
 
-> **Prototype disclaimer:** FLOWSHIELD is a simplified hackathon model. It is **not** a calibrated operational flood-forecasting system, real-time emergency service, or public-safety instruction tool.
+An explainable **flood-simulation & decision-support engine** — built in 24 hours for **Hack-a-Matics 2026** (VECTOR theme)
 
-## What the project does
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=20&duration=2800&pause=900&color=2EA5E8&center=true&vCenter=true&width=680&lines=SIMULATE+%E2%86%92+MONITOR+%E2%86%92+WARN;TEST+RESPONSE+%E2%86%92+COMPARE+MODELED+IMPACT;Deterministic+2D+flood+physics+engine;React+%2B+FastAPI+%2B+NumPy+%2B+Leaflet" alt="Typing SVG" />
 
-The main workflow is:
+[![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white)](backend)
+[![FastAPI](https://img.shields.io/badge/FastAPI-Backend-009688?style=for-the-badge&logo=fastapi&logoColor=white)](backend)
+[![React](https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react&logoColor=black)](frontend)
+[![Vite](https://img.shields.io/badge/Vite-6-646CFF?style=for-the-badge&logo=vite&logoColor=white)](frontend)
+[![Tailwind](https://img.shields.io/badge/Tailwind-CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](frontend)
+[![Leaflet](https://img.shields.io/badge/Leaflet-OpenStreetMap-199900?style=for-the-badge&logo=leaflet&logoColor=white)](frontend)
 
-**SIMULATE → MONITOR → WARN → TEST RESPONSE → COMPARE MODELED IMPACT**
+[![Tests](https://img.shields.io/badge/tests-passing-brightgreen?style=flat-square)](backend/tests)
+[![License](https://img.shields.io/badge/license-MIT-informational?style=flat-square)](#-license)
+[![Status](https://img.shields.io/badge/status-hackathon%20prototype-orange?style=flat-square)](#-important-disclaimer)
+[![Made with](https://img.shields.io/badge/made%20with-24%20hours%20%26%20too%20much%20coffee-critical?style=flat-square)](#)
 
-Current capabilities include:
+<br>
 
-- deterministic 2D flood simulation over connected regions
-- rainfall, elevation, drainage capacity, initial water, population, and region connectivity
+**[🚀 Quick Start](#-quick-start) · [🧠 How It Works](#-the-mathematical-model) · [📡 API](#-api-reference) · [🗺️ Demo Mode](#-demo-mode) · [⚠️ Limitations](#-core-assumptions--limitations)**
+
+</div>
+
+<br>
+
+> [!IMPORTANT]
+> FLOWSHIELD is a **simplified hackathon prototype**. It is **not** a calibrated operational flood-forecasting system, a real-time emergency service, or a public-safety instruction tool. Every number the app shows is a **modeled**, comparative output — clearly labeled as such throughout the UI. See [Core Assumptions & Limitations](#-core-assumptions--limitations).
+
+<br>
+
+## 📸 See It In Action
+
+<div align="center">
+
+<!--
+  Drop a demo GIF or screenshot(s) here before you submit — this is the single
+  highest-impact thing judges look at first. Suggested capture list:
+    1. dashboard-overview.gif   – grid, risk colors, playback controls
+    2. map-view.gif             – Bengaluru Leaflet map + neighborhood zoom
+    3. scenario-intervention.gif– running a scenario, applying an intervention, comparing impact
+    4. demo-mode.gif            – the guided 7-step Demo Mode end to end
+-->
+
+| Live flood progression | Bengaluru map + neighborhood view |
+|:---:|:---:|
+| `screenshots/dashboard-overview.gif` | `screenshots/map-view.gif` |
+| **Scenario Lab → Intervention Lab → Impact** | **Guided Demo Mode** |
+| `screenshots/scenario-intervention.gif` | `screenshots/demo-mode.gif` |
+
+*(Replace the paths above with real captures — `docs/screenshots/` — then update the table. A 15–20s GIF outperforms a paragraph of description in every judging round.)*
+
+</div>
+
+<br>
+
+## 💡 Why FLOWSHIELD
+
+Bengaluru's **September 5, 2022** flood event left neighborhoods like Mahadevapura, Bellandur, Varthur, K R Puram and Sarjapur underwater after **131.6 mm of rain in 24 hours**. Emergency response is reactive because it's hard to *test* an intervention before committing resources to it.
+
+FLOWSHIELD asks a narrower, answerable question:
+
+> *If it rains this much, and we take this drainage action — **how does the modeled outcome change**, region by region, before a single pump is deployed?*
+
+The single continuous workflow:
+
+```
+   ☔ SIMULATE  →  📡 MONITOR  →  🚨 WARN  →  🧪 TEST RESPONSE  →  📊 COMPARE MODELED IMPACT
+```
+
+<br>
+
+## ✨ Core Capabilities
+
+<table>
+<tr>
+<td width="50%" valign="top">
+
+**🌊 Flood Engine**
+- Deterministic 2D water-balance simulation over a connected region grid
+- Rainfall, elevation, drainage capacity, initial water, population & connectivity as inputs
 - Safe / Warning / Critical risk classification
-- timestep progression with play, pause, restart, slider, speed controls, and jump-to-warning/critical
-- current-state vs end-of-run forecast views
-- early-warning summaries and region-specific time-to-critical information
-- Scenario Lab for normal/heavy/extreme rainfall, drainage failure, and blocked drainage channels
-- Intervention Lab for drain unblocking, drainage upgrades, emergency pumping, and channel restoration
-- with-vs-without intervention comparison and **MODELED IMPACT** summaries
-- affected-population and region-level improved / unchanged / worsened analysis
-- Bengaluru map visualization using Leaflet + OpenStreetMap
-- city → region → illustrative simulated-neighborhood exploration
-- historical replay using a documented Bengaluru rainfall event
-- deterministic guided Demo Mode
+- Timestep progression with play / pause / restart, slider, speed control, jump-to-warning/critical
 
-## Mathematical model
+**🧪 Scenario Lab**
+- Normal, heavy & extreme rainfall presets
+- Drainage failure simulation
+- Blocked drainage channel simulation
 
-For each region and timestep, the simplified water balance is:
+</td>
+<td width="50%" valign="top">
 
-```text
-W(t+1) = W(t) + R + I - D - O
+**🛠️ Intervention Lab**
+- Unblock drain · Increase drainage capacity
+- Emergency pumping · Restore blocked channel
+- Instant before/after preview — no simulation re-run needed
+
+**📊 Impact Comparison**
+- With-vs-without intervention, same scenario, same engine
+- Affected-population deltas, region improved/unchanged/worsened
+- Peak depth, final depth, earliest-critical timing
+
+**🗺️ Geography & History**
+- Bengaluru map (Leaflet + OSM) with region → neighborhood drill-down
+- Historical replay of the Sept 5, 2022 event using documented rainfall data
+- Deterministic guided **Demo Mode** — zero hard-coded numbers
+
+</td>
+</tr>
+</table>
+
+<br>
+
+## 🧠 The Mathematical Model
+
+Each region, each timestep, follows a simplified water balance:
+
+<div align="center">
+
+### `W(t+1) = W(t) + R + I − D − O`
+
+</div>
+
+| Symbol | Meaning |
+|:---:|---|
+| `W` | Water depth in the region |
+| `R` | Rainfall added this timestep |
+| `I` | Water flowing **in** from neighboring regions |
+| `D` | Drainage removed this timestep |
+| `O` | Water flowing **out** to neighboring regions |
+
+**Flow rule:** the engine computes an *effective head* = `elevation + water depth` for every cell, then moves water from higher head to lower head across 4-connected (up/down/left/right) neighbors using a bounded, deterministic rule — capped so no cell can output more water than it holds, and capped for numerical stability (`flow_rate × timestep ≤ 0.25`). All edges are computed from one snapshot and applied together, so results are order-independent and fully reproducible. Drainage is then applied, capped at each region's remaining capacity and water.
+
+**Default risk thresholds** *(configurable — prototype assumptions, not regulatory standards)*:
+
+| Level | Condition |
+|:---:|---|
+| 🟢 Safe | depth `< 0.15 m` |
+| 🟡 Warning | `0.15 m ≤` depth `< 0.30 m` |
+| 🔴 Critical | depth `≥ 0.30 m` |
+
+Full engine documentation, module-by-module: [`backend/app/simulation/README.md`](backend/app/simulation/README.md)
+
+<br>
+
+## 🏗️ Architecture
+
+```mermaid
+flowchart LR
+    subgraph Frontend["⚛️ React + Vite Dashboard"]
+        UI[Grid / Map / Playback UI]
+        Charts[Recharts population & risk trends]
+        MapView[Leaflet + OSM neighborhood view]
+    end
+
+    subgraph Backend["⚡ FastAPI Service"]
+        API[REST API layer]
+        Scenarios[Scenario transforms]
+        Interventions[Intervention transforms]
+        Comparison[Comparison engine]
+        Engine[Deterministic flood simulation engine]
+    end
+
+    UI -- HTTP / JSON --> API
+    API --> Scenarios --> Engine
+    API --> Interventions --> Engine
+    API --> Comparison
+    Comparison --> Engine
+    Engine -- results --> API -- HTTP / JSON --> Charts
+    Engine -- results --> API --> MapView
 ```
 
-where:
-
-- `W` = water depth in the region
-- `R` = rainfall added during the timestep
-- `I` = water flowing in from neighboring regions
-- `D` = drainage removed during the timestep
-- `O` = water flowing out to neighboring regions
-
-The engine uses **effective head = elevation + water depth**. Water is transferred between up/down/left/right neighbors from higher head toward lower head using a bounded, deterministic flow rule. Drainage then removes water up to the region's drainage capacity and available water.
-
-### Risk classification
-
-Default prototype thresholds are:
-
-- **Safe:** depth `< 0.15 m`
-- **Warning:** depth `>= 0.15 m` and `< 0.30 m`
-- **Critical:** depth `>= 0.30 m`
-
-These thresholds are configurable and are **prototype assumptions**, not universal official flood-safety thresholds.
-
-More engine details and assumptions are documented in [`backend/app/simulation/README.md`](backend/app/simulation/README.md).
-
-## Core simulation assumptions and limitations
-
-The model intentionally simplifies real flood behavior:
-
-- each grid cell is one region with one elevation and one water depth
-- all cells are treated as equal area
-- only four-neighbor connectivity is modeled
-- grid boundaries are closed; drainage is the only modeled sink
-- rainfall and drainage capacity are constant during a single run
-- no infiltration, evaporation, soil saturation, hydraulic pipe-network behavior, momentum, friction, or velocity field is modeled
-- risk is based on modeled water depth, not water velocity or exposure duration
-- population is static during a run
-- the engine is not calibrated against a real flood event
-
-The result should therefore be interpreted as a **comparative modeled outcome under stated assumptions**, not a real-world flood prediction.
-
-## Architecture
+<details>
+<summary><b>📁 Full repository structure</b></summary>
 
 ```text
-React / Vite frontend
-        │
-        │ HTTP JSON
-        ▼
-FastAPI backend
-        │
-        ├── scenario transforms
-        ├── intervention transforms
-        ├── comparison engine
-        └── deterministic flood simulation engine
+flowshield/
+├── backend/
+│   ├── app/
+│   │   ├── simulation/      # core deterministic flood engine (pure Python + NumPy)
+│   │   ├── scenarios/       # scenario catalog & transforms
+│   │   ├── interventions/   # intervention catalog & transforms
+│   │   ├── comparison/      # with/without impact comparison logic
+│   │   ├── api/             # FastAPI routes, schemas, mapping
+│   │   └── main.py
+│   └── tests/                # backend pytest suite
+├── frontend/
+│   └── src/
+│       ├── components/       # dashboard UI components
+│       ├── pages/            # main dashboard
+│       ├── services/         # API client
+│       ├── utils/            # playback, scenario, comparison, map, replay helpers
+│       └── data/              # historical-event metadata
+├── tools/                    # Playwright browser end-to-end checks
+└── data/                     # project data placeholder
 ```
 
-### Repository structure
+</details>
 
-```text
-backend/app/simulation/     core flood engine
-backend/app/scenarios/      scenario definitions
-backend/app/interventions/  intervention definitions
-backend/app/comparison/     with/without comparison logic
-backend/app/api/            FastAPI routes, schemas, mapping
-backend/tests/              backend automated tests
-frontend/src/components/    dashboard UI components
-frontend/src/pages/         main dashboard
-frontend/src/services/      API client
-frontend/src/utils/         playback, scenarios, comparison, map, replay helpers
-frontend/src/data/          locally stored historical-event metadata
-tools/                      browser end-to-end checks
-data/                       project data placeholder
-```
+<br>
 
-## Technology stack
+## 🧰 Tech Stack
 
-### Backend
+<div align="center">
 
-- Python
-- FastAPI
-- Pydantic
-- NumPy
-- Pandas
-- pytest
+| Layer | Stack |
+|---|---|
+| **Backend** | ![Python](https://img.shields.io/badge/-Python-3776AB?style=flat-square&logo=python&logoColor=white) ![FastAPI](https://img.shields.io/badge/-FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white) ![Pydantic](https://img.shields.io/badge/-Pydantic-E92063?style=flat-square&logo=pydantic&logoColor=white) ![NumPy](https://img.shields.io/badge/-NumPy-013243?style=flat-square&logo=numpy&logoColor=white) ![Pandas](https://img.shields.io/badge/-Pandas-150458?style=flat-square&logo=pandas&logoColor=white) ![pytest](https://img.shields.io/badge/-pytest-0A9EDC?style=flat-square&logo=pytest&logoColor=white) |
+| **Frontend** | ![React](https://img.shields.io/badge/-React-61DAFB?style=flat-square&logo=react&logoColor=black) ![Vite](https://img.shields.io/badge/-Vite-646CFF?style=flat-square&logo=vite&logoColor=white) ![Tailwind](https://img.shields.io/badge/-TailwindCSS-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white) ![Recharts](https://img.shields.io/badge/-Recharts-FF6384?style=flat-square) ![Leaflet](https://img.shields.io/badge/-Leaflet-199900?style=flat-square&logo=leaflet&logoColor=white) ![Vitest](https://img.shields.io/badge/-Vitest-6E9F18?style=flat-square&logo=vitest&logoColor=white) |
+| **Data / Map** | OpenStreetMap tiles · documented IMD rainfall record for historical replay |
+| **Testing** | Backend `pytest` suite · Frontend `Vitest` · Playwright browser E2E checks |
 
-### Frontend
+</div>
 
-- React
-- Vite
-- Tailwind CSS
-- Recharts
-- Leaflet + React-Leaflet
-- OpenStreetMap tiles
-- Vitest
+<br>
 
-## Scenario Lab
+## 🧪 Scenario Lab
 
-The scenario system changes simulation inputs and then reuses the same flood engine.
+The scenario system changes simulation *inputs*, then reuses the exact same flood engine — nothing about the physics changes per-scenario.
 
 | Scenario | Modeled change |
 |---|---|
-| Baseline | No scenario transform |
+| Baseline | No transform |
 | Normal rainfall | Lower rainfall multiplier |
 | Heavy rainfall | Increased rainfall multiplier |
 | Extreme rainfall | Higher rainfall multiplier |
-| Drainage failure | Reduced drainage capacity across the city |
+| Drainage failure | Reduced drainage capacity, citywide |
 | Blocked drainage channel | Reduced capacity in modeled channel regions |
 
-`GET /api/scenarios` returns the currently configured scenario catalog, including parameter ranges and assumptions.
+`GET /api/scenarios` → current scenario catalog, including parameter ranges & assumptions.
 
-## Intervention Lab
-
-Interventions modify drainage-related inputs before the same simulation engine runs.
+## 🛠️ Intervention Lab
 
 | Intervention | Modeled action |
 |---|---|
 | Unblock Drain | Restores a target drain toward design capacity |
-| Increase Drainage Capacity | Adds drainage capacity to selected/all regions |
-| Emergency Pump | Adds temporary modeled removal capacity in target regions |
+| Increase Drainage Capacity | Adds capacity to selected/all regions |
+| Emergency Pump | Adds temporary removal capacity in target regions |
 | Restore Blocked Channel | Restores modeled blocked-channel drainage |
 
-`POST /api/interventions/preview` previews exact before/after drainage values without running the simulation.
+`POST /api/interventions/preview` → exact before/after drainage values, **without** running the full simulation.
 
-## Modeled Impact comparison
+## 📊 Modeled Impact Comparison
 
-`POST /api/compare` runs the same scenario twice:
+`POST /api/compare` runs the identical scenario twice — once without the intervention plan, once with it — and reports:
 
-1. without the intervention plan
-2. with the intervention plan
+- ✅ Critical & warning region counts
+- 👥 Affected population deltas (critical / warning population)
+- 📈 Peak & final water depth
+- ⏱️ Earliest critical time & region-level time-to-critical
+- 🔄 Per-region status: **improved / unchanged / worsened**
 
-The comparison reports modeled differences such as:
+> The comparison engine only *reads* two simulation outputs — it introduces **zero** separate flood physics, keeping every comparison fully explainable.
 
-- critical and warning regions
-- affected population
-- critical / warning population
-- peak and final water depth
-- earliest critical time
-- region time-to-critical
-- region status: improved / unchanged / worsened
+<br>
 
-The comparison engine reads the two simulation outputs; it does not introduce separate flood physics.
+## 🗺️ Bengaluru Map & Historical Replay
 
-## Early Warning and progression
+The map layer uses **Leaflet + OpenStreetMap** as a geographic backdrop for a synthetic 5×5 flood grid placed illustratively over Bengaluru. It is explicitly **not** a real Bengaluru flood-risk map — no geocoding, routing, or user-location data is used, and neighborhood roads/buildings/drainage are illustrative.
 
-The dashboard separates the **current timestep** from the **end-of-run forecast** and provides:
+**Historical Flood Replay — Bengaluru, September 5, 2022**
 
-- first warning time
-- first critical time
-- region-specific time-to-critical
-- highest-risk / watch regions
-- current and forecast population exposure
-- jump-to-warning / jump-to-critical controls
-- play / pause / restart / previous / next
-- timeline slider and playback speed controls
+The app runs a constant modeled rainfall rate derived from the documented 24-hour total through the same simulation engine:
 
-All values are produced from the existing simulation timeline.
-
-## Bengaluru map and neighborhood view
-
-The map layer uses **Leaflet + OpenStreetMap** as a geographic backdrop.
-
-Important limitations:
-
-- the 5×5 flood grid is synthetic
-- the fixed Bengaluru placement is illustrative
-- the map is **not** a Bengaluru flood-risk map
-- no user location is used
-- no geocoding or routing API is used
-- neighborhood roads, buildings, drainage, low areas, and water geometry are illustrative
-- neighborhood visualization uses the **same existing simulation state**; it does not run a second flood model
-
-The interface explicitly labels these views as illustrative.
-
-## Historical Flood Replay
-
-The project includes a replay entry for:
-
-**Bengaluru Flood — September 5, 2022**
-
-Observed reference input stored by the project:
-
-- **131.6 mm rainfall over 24 hours**
-- reported affected areas include Mahadevapura, Bellandur, Varthur, K R Puram, and Sarjapur-area locations
-
-The 131.6 mm / 24 h value is documented by the India Meteorological Department's Bengaluru-City September extreme-weather record and contemporary reporting. The app derives a constant modeled rate:
-
-```text
-131.6 mm / 24 h = 5.48 mm/h (rounded)
+```
+131.6 mm / 24h  →  5.48 mm/h (rounded)  →  full 24-hour engine replay
 ```
 
-It then runs that rate through the same simplified engine for the full 24-hour window.
+Sourced from the IMD Bengaluru-City extreme-weather record and contemporaneous news coverage (see [full README](#) sources section). This is a **modeled replay**, not a reconstruction of actual historical flood depths or inundation extent.
 
-> **Historical replay disclaimer:** This is a **modeled rainfall replay**, not a reconstruction of actual historical flood depths, local rainfall distribution, inundation extent, or damage.
+<br>
 
-Sources used by the event metadata:
+## 🎬 Demo Mode
 
-- India Meteorological Department, Bengaluru-City September extreme-weather record: https://city.imd.gov.in/citywx/extreme_data_view.php?id=43295
-- The Indian Express, September 5, 2022 coverage: https://indianexpress.com/article/cities/bangalore/after-heavy-overnight-rain-in-bengaluru-several-areas-waterlogged-traffic-hit-8131782/
-- The Indian Express, September 6, 2022 coverage: https://indianexpress.com/article/cities/bangalore/schools-shut-bengalurus-puram-heavy-rainfall-streets-flooded-8135098/
+A fully deterministic, judge-ready walkthrough that drives the **real** application and **real** backend — no mocked numbers:
 
-No hourly rainfall profile is invented from the 24-hour total.
+```
+1️⃣  Baseline            →  2️⃣  Heavy rainfall scenario   →  3️⃣  Flood progression
+4️⃣  Early warning        →  5️⃣  Intervention plan          →  6️⃣  Run with interventions
+7️⃣  MODELED IMPACT comparison
+```
 
-## Demo Mode
+Every value shown comes from a live API response — the demo script hard-codes nothing.
 
-Demo Mode provides a deterministic guided presentation using the real application controls and backend:
+<br>
 
-1. Baseline
-2. Heavy rainfall scenario
-3. Flood progression
-4. Early warning / first critical region
-5. Intervention plan
-6. Run with interventions
-7. MODELED IMPACT comparison
+## 📡 API Reference
 
-The demo script contains no hard-coded result metrics; displayed values come from real API responses.
-
-## API
-
-Base prefix: `/api`
+Base prefix: `/api` · Interactive docs at `http://127.0.0.1:8000/docs`
 
 | Method | Endpoint | Purpose |
-|---|---|---|
-| GET | `/api/health` | backend health check |
-| POST | `/api/simulate` | run one flood simulation |
-| GET | `/api/scenarios` | list scenario catalog |
-| GET | `/api/interventions` | list intervention catalog |
-| POST | `/api/interventions/preview` | preview modeled intervention input changes |
-| POST | `/api/compare` | compare the same scenario without vs with interventions |
+|:---:|---|---|
+| `GET` | `/api/health` | Backend health check |
+| `POST` | `/api/simulate` | Run one flood simulation |
+| `GET` | `/api/scenarios` | List scenario catalog |
+| `GET` | `/api/interventions` | List intervention catalog |
+| `POST` | `/api/interventions/preview` | Preview modeled input changes |
+| `POST` | `/api/compare` | Compare scenario with vs. without interventions |
 
-Interactive FastAPI documentation is available at:
-
-```text
-http://127.0.0.1:8000/docs
-```
-
-### Minimal simulation request
+<details>
+<summary><b>▶️ Minimal request</b></summary>
 
 ```json
 {}
 ```
+Runs the built-in deterministic synthetic city with default controls.
+</details>
 
-This runs the built-in deterministic synthetic city with default controls.
-
-### Example custom request
+<details>
+<summary><b>▶️ Custom request example</b></summary>
 
 ```json
 {
@@ -298,53 +332,34 @@ This runs the built-in deterministic synthetic city with default controls.
 }
 ```
 
-Units:
+**Units** — elevation/water/thresholds: meters · rainfall/drainage: mm/h · time: minutes
+</details>
 
-- elevation / water / thresholds: meters
-- rainfall / drainage: mm/h
-- time: minutes
+<br>
 
-## Running locally
+## 🚀 Quick Start
 
-### 1. Backend
+### Prerequisites
+![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=flat-square&logo=python&logoColor=white) ![Node](https://img.shields.io/badge/Node.js-18+-339933?style=flat-square&logo=node.js&logoColor=white)
 
-From the project root:
+### 1️⃣ Backend
 
 ```bash
 cd backend
 python -m venv .venv
-```
 
-Activate the environment:
-
-**Windows PowerShell / Command Prompt**
-
-```bat
+# Windows
 .venv\Scripts\activate
-```
-
-**macOS / Linux**
-
-```bash
+# macOS / Linux
 source .venv/bin/activate
-```
 
-Install and run:
-
-```bash
 pip install -r requirements.txt
 uvicorn app.main:app --reload --port 8000
 ```
 
-Backend health endpoint:
+Health check → `http://127.0.0.1:8000/api/health`
 
-```text
-http://127.0.0.1:8000/api/health
-```
-
-### 2. Frontend
-
-Open a second terminal:
+### 2️⃣ Frontend
 
 ```bash
 cd frontend
@@ -352,36 +367,22 @@ npm install
 npm run dev
 ```
 
-Then open:
+Open → `http://localhost:5173`
 
-```text
-http://localhost:5173
-```
+> 🌐 Map tiles require internet access; the synthetic grid overlay still works without live tile imagery.
 
-Map tiles require internet access. The synthetic overlay can still exist without live tile imagery.
+<br>
 
-## Testing
-
-### Backend
+## ✅ Testing
 
 ```bash
-cd backend
-pytest
-```
+# Backend
+cd backend && pytest
 
-### Frontend
+# Frontend
+cd frontend && npm test && npm run build
 
-```bash
-cd frontend
-npm test
-npm run build
-```
-
-### Browser end-to-end checks
-
-Optional browser checks are provided in `tools/` and require Playwright + Chromium. Start the frontend first.
-
-```bash
+# Optional browser E2E (Playwright — start the frontend first)
 pip install playwright psutil
 playwright install chromium
 python tools/e2e_map.py
@@ -389,23 +390,56 @@ python tools/e2e_demo.py
 python tools/e2e_historical_zoom.py
 ```
 
-`tools/e2e_audit.py` includes backend-offline/recovery behavior and may take control of port 8000 while it runs.
+`tools/e2e_audit.py` covers backend-offline/recovery behavior and may take control of port `8000` while running.
 
-## AI assistance disclosure
+<br>
 
-AI coding assistants were used during development for code generation, debugging support, test generation, documentation assistance, and implementation suggestions.
+## ⚠️ Core Assumptions & Limitations
 
-The team remained responsible for:
+FLOWSHIELD deliberately trades physical fidelity for **speed, determinism, and explainability**:
 
-- selecting and defining the problem and solution direction
-- choosing the mathematical modeling approach and assumptions
-- integrating the simulation, API, frontend, scenarios, interventions, comparison, map, and replay features
-- reviewing generated code and behavior
-- manually testing the complete workflow
-- validating that modeled claims and disclaimers match the implemented system
+- One grid cell = one region, one elevation, one water depth, equal area
+- Only 4-neighbor connectivity; grid boundaries are closed (drainage is the only sink)
+- Rainfall & drainage capacity are constant within a single run
+- No infiltration, evaporation, soil saturation, pipe-network hydraulics, momentum, friction, or velocity field
+- Risk is based on **modeled depth only** — not velocity or exposure duration
+- Population is static during a run
+- The engine is **not calibrated** against a real flood event
 
-AI assistance does not change the project's central limitation: FLOWSHIELD is a simplified prototype model, not an operational forecasting product.
+➡️ Every result should be read as a **comparative modeled outcome under stated assumptions**, not a real-world flood prediction. This is stated directly in the product UI, not just here.
 
-## Submission note
+<br>
 
-The project is intended as an explainable hackathon prototype for exploring **how modeled flood risk changes under different rainfall, drainage, and intervention assumptions**. Results should be used only for demonstration and comparative analysis within the prototype.
+## 🤖 AI Assistance Disclosure
+
+AI coding assistants supported code generation, debugging, test generation, documentation, and implementation suggestions during this 24-hour build. The team remained fully responsible for:
+
+- Defining the problem and solution direction
+- Choosing the modeling approach and every stated assumption
+- Integrating simulation, API, frontend, scenarios, interventions, comparison, map & replay features
+- Reviewing generated code and manually testing the complete workflow
+- Validating every claim and disclaimer against actual implemented behavior
+
+<br>
+
+## 📄 License
+
+Released under the **MIT License** — see [`LICENSE`](LICENSE) for details.
+
+## 🙏 Acknowledgments
+
+- **India Meteorological Department** — Bengaluru-City extreme-weather record
+- **OpenStreetMap** contributors — map tile data
+- **Hack-a-Matics 2026** organizers — for the VECTOR theme and the 24 hours
+
+<br>
+
+<div align="center">
+
+### Built in 24 hours. Tested for real. Labeled honestly.
+
+**FLOWSHIELD** — because the best time to test an intervention is *before* the water rises.
+
+⭐ *If this project impressed you, a star helps more than you'd think.* ⭐
+
+</div>
